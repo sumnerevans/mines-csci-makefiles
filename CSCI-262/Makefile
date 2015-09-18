@@ -2,10 +2,13 @@
 # file below...
 # Additionally, write the name of the output binary
 TARGETS=imgeditor.cpp strio.cpp
-OUTFILE=imgeditior
+OUTFILE=imgeditor
 # Set your compiler, stanford library must be complied with g++ for some very odd reasons anyway
 CXX=clang++ -g -std=c++11
-all: $(HOME)/.lib/cpplib/cpplib.o
+
+all: $(OUTFILE)
+
+$(OUTFILE): $(HOME)/.lib/cpplib/cpplib.o
 	@echo Compiling your code...
 	$(CXX) -I$(HOME)/.lib/cpplib/include -o $(OUTFILE) $(TARGETS) -L $(HOME)/.lib/cpplib/cpplib.o
 
@@ -20,9 +23,14 @@ $(HOME)/.lib/cpplib:
 	@unzip -d $(HOME)/.lib -q -o $(HOME)/.lib/cpplib.zip
 	@rm $(HOME)/.lib/cpplib.zip
 
+run: $(OUTFILE)
+	./$(OUTFILE) $(ARGS)
+
 zip:
 	zip $(OUTFILE).zip $(TARGETS) *.h *.hpp
 
 clean:
 	-rm -f $(OUTFILE)
+
+libclean:
 	-rm -rf $(HOME)/.lib/cpplib
