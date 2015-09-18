@@ -27,7 +27,7 @@ run: $(OUTFILE)
 	./$(OUTFILE) $(ARGS)
 
 zip:
-	zip $(OUTFILE).zip $(TARGETS) *.h *.hpp
+	zip $(OUTFILE).zip $(TARGETS) *.h *.hpp README
 
 clean:
 	-rm -f $(OUTFILE)
