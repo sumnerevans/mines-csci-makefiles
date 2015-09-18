@@ -1,0 +1,22 @@
+#!/bin/sh
+# stanman cpplib documentation wrapper
+# Author: Jack Rosenthal
+# requires w3m
+# usage: stanman [manpage]
+if [ $(which w3m | wc -l) -eq 0 ]
+then
+    echo "stanman requires w3m to be installed and in your path"
+    exit 1
+fi
+
+if [ $# -eq 1 ]
+then
+    if [ -f ~/.lib/cpplib/doc/$1-class.html ]
+    then
+        w3m -o confirm_qq=0 ~/.lib/cpplib/doc/$1-class.html
+    else
+        w3m -o confirm_qq=0 ~/.lib/cpplib/doc/$1.html
+    fi
+else
+    w3m -o confirm_qq=0 ~/.lib/cpplib/doc/index.html
+fi
