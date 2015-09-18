@@ -1,0 +1,45 @@
+" This is a pretty lightweight .vimrc template for people getting started with
+" vim. Edit it to your liking!
+"
+" If you are an absolute newbie to vim, I recommend you type :q now and type
+" vimtutor into your terminal. You will learn how to use the basics of vim.
+"
+" You can put anything in here that you can type after pressing : when editing
+" a file. It will run when you open vim. Put this file at ~/.vimrc
+"
+" Author - Jack Rosenthal <jrosenth@mines.edu>
+set nu                      " enable line numbering
+set nocompatible            " make vim smart and not be vi compatible
+syn on                      " syntax highlighting
+set t_Co=256                " make use of 256 terminal colors
+set expandtab               " convert tabs to spaces
+set shiftwidth=4            " set shift width to 4 spaces
+set softtabstop=4           " set tab with to 4 spaces
+set browsedir=buffer        " browse files in your vim buffer
+set scrolloff=5             " keep 5 lines at the top and bottom of your screen
+set dir=~/.vim/swap//       " get swap files out of your way
+set undodir=~/.vim/undo//   " get undo files out of your way
+set undofile                " enable persistent undo
+set hidden                  " allow you to open more buffers without writing the file
+
+" You may want to set a good color scheme. Go find one you like on the
+" interwebz, drop it in ~/.vim/colors/ and update this respectively
+"
+" A good resource is http://vimcolors.com
+colorscheme default
+
+" Automatically break lines at 79 characters on TeX/LaTeX files
+" Enable spell check on TeX/LaTeX files
+autocmd BufNewFile,BufRead *.tex setlocal tw=79
+autocmd BufNewFile,BufRead *.tex setlocal spell spelllang=en_us
+
+" Automatically break lines at 72 characters when writing emails in mutt
+" Enable spell check for emails in mutt
+autocmd BufRead /tmp/mutt-* setlocal tw=72
+autocmd BufRead /tmp/mutt-* setlocal spell spelllang=en_us
+
+" Highlight unwanted whitespace
+set list listchars=tab:\▶\ ,trail:␣,nbsp:␣
+
+" Auto indent your code, do some magic
+filetype plugin indent on
