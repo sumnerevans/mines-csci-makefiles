@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+# Script to test CSCI-262 labs
+# Author: Jack Rosenthal <jrosenth@mines.edu>
+# Usage:
+# python3 labtest.py [problem_name]
+import requests
+import sys
+
+test_url = "http://flowers.mines.edu/cgi-bin/submit.cgi"
+
+try:
+    problem_name = sys.argv[1]
+except:
+    problem_name = input("problem_name = ")
+
+files = {'source_file': open(problem_name + ".cpp", 'rb')}
+r = requests.post(test_url, files=files, data={'problem': problem_name})
+
+try:
+    print(r.text.split('<!--')[1].split('-->')[0])
+    if 'generating backtrace' in r.text:
+        print(r.text.split('</p>')[-1].split('</body>')[0].replace('<br/>',''))
+except:
+    if 'You have compile errors:' in r.text:
+        print('You have compile errors:')
+        print(r.text.split('<pre>')[1].split('</pre>')[0])
+    else:
+        print(r.text)
