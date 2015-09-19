@@ -1,21 +1,27 @@
 # List all the cpp files you would like this makefile to compile into a single
 # file below...
 # Additionally, write the name of the output binary
-TARGETS=imgeditor.cpp strio.cpp
-OUTFILE=imgeditor
-# Set your compiler, stanford library must be complied with g++ for some very odd reasons anyway
+TARGETS=main.cpp maze_solver.cpp
+OUTFILE=maze
+# Set your compiler
 CXX=clang++ -g -std=c++11
 
 all: $(OUTFILE)
 
-$(OUTFILE): $(HOME)/.lib/cpplib/cpplib.o
+$(OUTFILE): stanford
 	@echo Compiling your code...
-	$(CXX) -I$(HOME)/.lib/cpplib/include -o $(OUTFILE) $(TARGETS) -L $(HOME)/.lib/cpplib/cpplib.o
+	$(CXX) -I$(HOME)/.lib/cpplib/include -L$(HOME)/.lib/cpplib -o $(OUTFILE) $(TARGETS) -lstanford
 
-$(HOME)/.lib/cpplib/cpplib.o: $(HOME)/.lib/cpplib
-	@echo Compiling stanford cpp library... This may take a while...
-	@g++ -std=c++11 -I$(HOME)/.lib/cpplib/include -o $(HOME)/.lib/cpplib/cpplib.o $(shell find $(HOME)/.lib/cpplib/src -name \*.cpp -not -name main.cpp)
-	@echo -e
+stanford: $(HOME)/.lib/cpplib $(HOME)/.lib/cpplib/libstanford.a
+
+$(HOME)/.lib/cpplib/libstanford.a: $(HOME)/.lib/cpplib
+	@echo Compiling Stanford CPPLib... This may take a while...
+	make $(patsubst %.cpp,%.o,$(shell find $(HOME)/.lib/cpplib/src -name \*.cpp -not -name main.cpp))
+	ar -cvq $(HOME)/.lib/cpplib/libstanford.a $(HOME)/.lib/cpplib/src/*.o
+	@echo Done compiling the Stanford CPPLib.
+
+$(HOME)/.lib/cpplib/src/%.o: $(HOME)/.lib/cpplib/src/%.cpp
+	$(CXX) -fPIC -I$(HOME)/.lib/cpplib/include -c $< -o $@
 
 $(HOME)/.lib/cpplib:
 	@mkdir -p $(HOME)/.lib
