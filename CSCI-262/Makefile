@@ -14,7 +14,7 @@ $(OUTFILE): $(HOME)/.lib/cpplib/cpplib.o
 
 $(HOME)/.lib/cpplib/cpplib.o: $(HOME)/.lib/cpplib
 	@echo Compiling stanford cpp library... This may take a while...
-	@g++ -std=c++11 -I$(HOME)/.lib/cpplib/include -o $(HOME)/.lib/cpplib/cpplib.o $(shell find cpplib/src -name \*.cpp -not -name main.cpp)
+	@g++ -std=c++11 -I$(HOME)/.lib/cpplib/include -o $(HOME)/.lib/cpplib/cpplib.o $(shell find $(HOME)/.lib/cpplib/src -name \*.cpp -not -name main.cpp)
 	@echo -e
 
 $(HOME)/.lib/cpplib:
