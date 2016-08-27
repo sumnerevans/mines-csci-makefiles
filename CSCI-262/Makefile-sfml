@@ -25,7 +25,7 @@ $(HOME)/.lib/cpplib/src/%.o: $(HOME)/.lib/cpplib/src/%.cpp
 
 $(HOME)/.lib/cpplib:
 	@mkdir -p $(HOME)/.lib
-	@wget -O$(HOME)/.lib/cpplib.zip http://eecs.mines.edu/Courses/csci262/resources/StanfordCPPLib/cpplib.zip
+	@wget -O$(HOME)/.lib/cpplib.zip http://eecs.mines.edu/Courses/csci262/resources/dist/cpplib.zip
 	@unzip -d $(HOME)/.lib -q -o $(HOME)/.lib/cpplib.zip
 	@rm $(HOME)/.lib/cpplib.zip
 
