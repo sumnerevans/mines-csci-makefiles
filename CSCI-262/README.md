@@ -21,9 +21,12 @@ Requires Python 3 and the requests library for Python 3.
 
 ## Usage
 ### Scripts
-To test your labs: (using digitsum as an example)
+**Due to changes to the APIT site, `labtest` no longer works**
+~~To test your labs: (using digitsum as an example)
 
     $ labtest digitsum
+
+~~
 
 Viewing documentation for the Stanford library, requires w3m:
 
