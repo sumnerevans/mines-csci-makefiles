@@ -20,14 +20,7 @@ edit the makefile and read the comments.
 Requires Python 3 and the requests library for Python 3.
 
 ## Usage
-### Scripts
-**Due to changes to the APIT site, `labtest` no longer works**
-~~To test your labs: (using digitsum as an example)
-
-    $ labtest digitsum
-
-~~
-
+### Stanford Library Viewer
 Viewing documentation for the Stanford library, requires w3m:
 
     $ stanman           # View all of the documentation
