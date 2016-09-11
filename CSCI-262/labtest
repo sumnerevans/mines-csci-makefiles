@@ -1,0 +1,36 @@
+#!/bin/bash
+# labtest for the new APTs
+# Author: Jonathan "Sumner" Evans
+# usage: labtest [problem_name]
+cxx="clang++ -g -std=c++11"
+libroot="$HOME/.lib/cpplib/"
+
+# Download and compile the Stanford Library if it hasn't been yet
+if [ ! -d "$libroot" ]; then
+    echo "Downloading the Stanford Library"
+    mkdir -p $HOME/.lib
+    wget -O$HOME/.lib/cpplib.zip http://eecs.mines.edu/Courses/csci262/resources/dist/cpplib.zip
+    unzip -d $HOME/.lib -q -o $HOME/.lib/cpplib.zip
+    rm $HOME/.lib/cpplib.zip
+
+    echo "Compiling Stanford CPPLib... This may take a while..."
+    make $(patsubst %.cpp,%.o,$(shell find $(HOME)/.lib/cpplib/src -name \*.cpp -not -name main.cpp))
+    ar -cvq $(HOME)/.lib/cpplib/libstanford.a $(HOME)/.lib/cpplib/src/*.o
+    echo "Done compiling the Stanford CPPLib."
+fi
+
+case $# in
+    1 )
+        problem_name=$1
+        ;;
+    * )
+        echo "Usage: $0 [problem_name]" && exit
+        ;;
+esac
+
+# Compile and run the APT
+$cxx -I$HOME/.lib/cpplib/include -L$HOME/.lib/cpplib -o $problem_name.out $problem_name.cpp -lstanford
+
+./$problem_name.out
+
+rm $problem_name.out

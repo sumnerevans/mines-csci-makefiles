@@ -10,7 +10,7 @@ all: $(OUTFILE)
 
 $(OUTFILE): stanford
 	@echo Compiling your code...
-	$(CXX) -I$(HOME)/.lib/cpplib/include -L$(HOME)/.lib/cpplib -o $(OUTFILE) $(TARGETS) -lstanford
+	$(CXX) -I$(HOME)/.lib/cpplib/include -L$(HOME)/.lib/cpplib -o $(OUTFILE).out $(TARGETS) -lstanford
 
 stanford: $(HOME)/.lib/cpplib $(HOME)/.lib/cpplib/libstanford.a
 
@@ -30,13 +30,13 @@ $(HOME)/.lib/cpplib:
 	@rm $(HOME)/.lib/cpplib.zip
 
 run: $(OUTFILE)
-	./$(OUTFILE) $(ARGS)
+	./$(OUTFILE).out $(ARGS)
 
 zip:
 	zip $(OUTFILE).zip $(TARGETS) *.h *.hpp README
 
 clean:
-	-rm -f $(OUTFILE)
+	-rm -f $(OUTFILE).out
 
 libclean:
 	-rm -rf $(HOME)/.lib/cpplib
