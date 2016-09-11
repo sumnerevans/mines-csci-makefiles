@@ -25,12 +25,12 @@ To test an APT, use `labtest`: (using digitsum as an example)
 
     $ labtest digitsum
 
-This will look for and compile digitsum.cpp then run the resulting output. `labtest` will
-automatically include the Stanford Library when compiling your code. You must supply tests in a main
-function within your cpp file for this to work.
+This will look for and compile `digitsum.cpp` then run the resulting output. `labtest` will
+automatically include the Stanford Library when compiling your code. You must supply tests in a
+`main()` function within your `.cpp` file for this to work.
 
 ### Stanford Library Viewer
-Viewing documentation for the Stanford library, requires w3m:
+Viewing documentation for the Stanford library, requires [w3m](http://w3m.sourceforge.net/):
 
     $ stanman           # View all of the documentation
     $ stanman Map       # View a specific page (ex. Map)
