@@ -32,6 +32,9 @@ $(HOME)/.lib/cpplib:
 run: $(OUTFILE)
 	./$(OUTFILE).out $(ARGS)
 
+debug: $(OUTFILE)
+	gdb $(OUTFILE).out
+
 zip:
 	zip $(OUTFILE).zip $(TARGETS) *.h *.hpp README
 

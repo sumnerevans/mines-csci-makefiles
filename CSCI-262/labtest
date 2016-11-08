@@ -1,7 +1,11 @@
 #!/bin/bash
+#
 # labtest for the new APTs
+#
 # Author: Jonathan "Sumner" Evans
+#
 # usage: labtest [problem_name]
+
 cxx="clang++ -g -std=c++11"
 libroot="$HOME/.lib/cpplib/"
 
@@ -21,7 +25,10 @@ fi
 
 case $# in
     1 )
-        problem_name=$1
+        problem_name=$(basename "$1")
+
+        # Remove the file extension
+        problem_name="${problem_name%.*}"
         ;;
     * )
         echo "Usage: $0 [problem_name]" && exit
@@ -29,8 +36,6 @@ case $# in
 esac
 
 # Compile and run the APT
-$cxx -I$HOME/.lib/cpplib/include -L$HOME/.lib/cpplib -o $problem_name.out $problem_name.cpp -lstanford
+$cxx -g -I$HOME/.lib/cpplib/include -L$HOME/.lib/cpplib -o $problem_name.out $problem_name.cpp -lstanford
 
-./$problem_name.out
-
-rm $problem_name.out
+./$problem_name.out && rm $problem_name.out
