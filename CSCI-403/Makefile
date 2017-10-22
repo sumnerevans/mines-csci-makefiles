@@ -7,7 +7,7 @@ ZIPFILE=project$(PROJECT_NUM).zip
 all: $(SQLFILE)
 
 run: $(SQLFILE)
-	psql postgresql://$(USERNAME)@flowers.mines.edu/csci403 -f $(SQLFILE)
+	psql postgresql://$(USERNAME)@flowers.mines.edu/csci403 -qf $(SQLFILE)
 
 zip:
 	zip $(ZIPFILE) $(SQLFILE) README
